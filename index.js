@@ -28,12 +28,14 @@ document.addEventListener('click', function(e){
     }
 })
 
+//WILL SIMULATE A CLICK ON THE SEARCH BUTTON WHEN ENTER IS PRESSED
 searchBar.addEventListener('keypress', (event)=>{
     if(event.key === "Enter"){
         document.getElementById("search-button").click()
     }
 })
 
+//WILL SORT MOVIE ARRAY IN ALPHABETICAL ORDER IF SELECTED
 function sortAlpha(){
     movieArr.sort(function (a, b) {
         if (a.title < b.title) {
@@ -47,6 +49,7 @@ function sortAlpha(){
     renderHtml()
 }
 
+//WILL SORT MOVIE ARRAY IN RATINGS ORDER IF SELECTED
 function sortRate(){
     movieArr.sort(function (a, b) {
         if (a.rated < b.rated) {
@@ -61,8 +64,9 @@ function sortRate(){
 }
 
 //FUNCTION FIRSTS FETCHES THE IMDB NUMBER FOR THE MOVIE NAME SEARCHED FOR THEN USES THAT NUMBER TO FETCH ALL INFO ON THE SELECTED NAME
-//THEN SAVES MOVIE INFO REQUIRED IN AN OBJECT WITH AN ID NUMBER INCLUDED TO HELP WITH BUTTON CLICKS IN AN ARRAY
-//LOOPS THROUGH THE ARRAY OF NEW OBJECTS CREATED TO RENDER HTML TO SCREEN OF ALL MOVIES FOUND
+//THEN SAVES MOVIE INFO REQUIRED IN AN OBJECT WITH AN ID NUMBER INCLUDED TO HELP WITH BUTTON CLICKS IN AN ARRAY, ADDS OBJECT TO MOVIE ARRAY
+//CHECKS IF MOVIE ARRAY NEEDS TO BE SORTED
+//RUNS THE RENDER HTML FUNCTION
 //IF NO MOVES MATCH SHOWS ERROR MESSSAGE
 function fetchApi(){
     fetch(`https://www.omdbapi.com/?s=${searchName}&&apikey=88275857`)
@@ -105,6 +109,7 @@ function fetchApi(){
     })
 }
 
+//LOOPS THROUGH MOVIE ARRAY AND RENDERS THE HTML TO SCREEN
 function renderHtml(){
     let html = ''
     for(movie of movieArr){
