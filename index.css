@@ -36,11 +36,12 @@ body {
     background-repeat: none; 
     height: 160px;
     justify-content: space-around;
-}
-
-.header, .start-page {
     width: 100%;
     align-items: center;
+}
+
+.header, .start-page{
+    align-items: center; 
 }
 
 h1{
@@ -65,7 +66,7 @@ button.remove-btn,
     position: absolute;
     top: 145px;
     border-radius: 5px;
-    margin-left: 45px; 
+    width: 100%;
 }
 
 .input-bar{
@@ -108,6 +109,7 @@ button.remove-btn,
 /*OPENING PAGE BODY STYLING*/
 .start-page{
     height: 100vh;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
 }
@@ -138,6 +140,7 @@ h4.lets-add{
 
 .movie-info{
     padding: 45px;
+    justify-content: center;
 }
 
 .movie-container{
@@ -159,10 +162,11 @@ h4.lets-add{
 }
 
 h3{
-    margin-bottom: 0;
+    margin-bottom: 5px;
     font-weight: 600;
     font-size: 18px;
     padding-right: 15px;
+    height: 30px;
 }
 
 h3, 
@@ -179,11 +183,12 @@ h5{
 }
 
 h5.movie-rated{
-    margin-top: 2px;
+    margin-top: 5px;
     margin-bottom: 0;
 }
 
 .star-icon{
+    margin-top: 4px;
     width: 15px;
     height: 15px;
 }
@@ -209,7 +214,6 @@ button.watchlist-btn, button.remove-btn{
     height: 25px;
     border-radius: 50%;
     margin-top: 5px;
-    padding-top: 2.5px;
     background-color: white;
     color: black;
 }
@@ -218,24 +222,22 @@ p.plot{
     width: 330px;
     font-size: 14px;
     margin-top: 5px;
+    margin-bottom: 0;
 }
 
 .plot{
     height: 100px;
 }
 
-hr{
-    margin: 25px 45px;
-}
-
 /* MEDIA QUERIES*/
-@media (min-width:550px){
+@media (min-width:560px){
     .container{
-        width: 100%;
+        width: auto;
     }
     .movie-info{
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto;
+        padding-left: 20px
     }
     h1{
         font-size: 2rem;
@@ -245,16 +247,45 @@ hr{
     }
     .search-bar{
         display: flex;
-        width: 100%;
         justify-content: center;
+    }
+    .movie-container{
+        margin-right: 25px;
+    }
+    p.plot{
+        width: 280px;
+        font-size: 12px;
+    }
+    .movie-info-box{
+        width: 280px;
+    }
+    .movie-img{
+        margin-right: 10px
     }
 }
 
-@media (min-width:880px){
+@media (min-width:1320px){
     h1{
         font-size: 4rem;
+        margin-top: 20px;
     }
     .watchlist{
         font-size: 2.5rem
+    }
+    .movie-info{
+        grid-template-columns: auto auto auto;
+        padding-left: 50px;
+    }
+    .movie-container{
+        margin-right: 35px;
+    }
+    p.plot{
+        width: 300px;
+    }
+    .movie-info-box{
+        width: 300px;
+    }
+    h5.movie-min, h5.movie-type, p.plot{
+        font-size: 11px;
     }
 }
