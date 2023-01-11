@@ -79,6 +79,7 @@ p.list-item{
     height: 33px;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
+    margin-left: 10px;;
 }
 
 .input-bar, 
@@ -111,13 +112,16 @@ p.list-item{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     font-size: 14px;
-    margin-right: 100px;
 }
 
 .drop-btn{
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     width: 140px;
+}
+
+.drop-btn, .my-dropdown{
+    margin-left: 10px;
 }
 
 .my-dropdown{
@@ -293,6 +297,9 @@ p.plot{
     .movie-img{
         margin-right: 10px
     }
+    .drop-btn, .my-dropdown{
+        margin-left: 50px;
+    }
 }
 
 @media (min-width:1320px){
@@ -318,5 +325,8 @@ p.plot{
     }
     h5.movie-min, h5.movie-type, p.plot{
         font-size: 11px;
+    }
+    .drop-btn, .my-dropdown{
+        margin-left: 100px;
     }
 }
