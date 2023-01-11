@@ -1,18 +1,64 @@
 let movieArr = []
-let searchName = ""
+let searchName = ''
 let SelectedMovieArray
 let selectedMovie
+
+let alpha = false
+let rate = false
+let length = false
+
 const movieInfo = document.getElementById("movie-info")
+const searchBar = document.getElementById("search-bar")
 
 //EVENT LISTENERS FOR SEARCH BUTTON TO GET INPUT VALUE AND RUN THE FUNCTION TO FETCH API, AND FOR WATCHLIST BUTTON TO RUN THE FUNCTION TO SAVE TO LOCAL STORAGE
 document.addEventListener('click', function(e){
     if(e.target.id === "search-button"){
-        searchName =  document.getElementById("search-bar").value
+        searchName = searchBar.value
         fetchApi()
     } else if(e.target.dataset.watch){
         saveToLocal(e.target.dataset.watch)
+    } else if(e.target.id === "drop-btn"){
+        document.getElementById("my-dropdown").classList.toggle("show")
+    } else if(e.target.id === "alpha"){
+        alpha = true
+        sortAlpha()
+    } else if(e.target.id === "rate"){
+        rate = true
+        sortRate()
     }
 })
+
+searchBar.addEventListener('keypress', (event)=>{
+    if(event.key === "Enter"){
+        document.getElementById("search-button").click()
+    }
+})
+
+function sortAlpha(){
+    movieArr.sort(function (a, b) {
+        if (a.title < b.title) {
+            return -1
+        }
+        if (a.title > b.title) {
+            return 1
+        }
+        return 0
+        })
+    renderHtml()
+}
+
+function sortRate(){
+    movieArr.sort(function (a, b) {
+        if (a.rated < b.rated) {
+            return -1
+        }
+        if (a.rated > b.rated) {
+            return 1
+        }
+        return 0
+        })
+    renderHtml()
+}
 
 //FUNCTION FIRSTS FETCHES THE IMDB NUMBER FOR THE MOVIE NAME SEARCHED FOR THEN USES THAT NUMBER TO FETCH ALL INFO ON THE SELECTED NAME
 //THEN SAVES MOVIE INFO REQUIRED IN AN OBJECT WITH AN ID NUMBER INCLUDED TO HELP WITH BUTTON CLICKS IN AN ARRAY
@@ -23,7 +69,6 @@ function fetchApi(){
     .then(res => res.json())
     .then(data => {
         const movieSearch = data.Search
-        let html = '' 
         let movieDetails = {}
         for (movie of movieSearch){
             if(movie.Poster !== "N/A"){
@@ -39,34 +84,15 @@ function fetchApi(){
                             rated: (movies.Ratings[0].Value).substring(0, 3),
                             id: Math.floor(Math.random()*1000000)
                         }
-                        
                         movieArr.push(movieDetails)
-                        
-                        html += `
-                            <div class="movie-container">
-                                <img src=${movieDetails.poster} alt="movie-poster" class="movie-img"/>
-                                <div class="movie-info-box">
-                                    <div class="movie-title-box">
-                                        <h3 class="movie-name">${movieDetails.title}</h3>
-                                        <img src="./star-icon.png" alt="star-icon" class="star-icon"/>
-                                        <h5 class="movie-rated">${movieDetails.rated}</h5>
-                                    </div>
-                                        <div class="movie-info-inner">
-                                            <h5 class="movie-min">${movieDetails.runtime}</h5>
-                                            <h5 class="movie-type">${movieDetails.genre}</h5> 
-                                            <div class="watchlist-box">
-                                                <button id="watchlist-btn" class="watchlist-btn" data-watch=${movieDetails.id}>+</button>
-                                                <h5>Watchlist</h5>
-                                            </div>   
-                                        </div>
-                                    <p class="plot">${movieDetails.plot}</p>
-                                </div>
-                            </div>
-                        `      
-                        movieInfo.innerHTML = html
+                        sortAlpha()
+                        sortRate()
+                        renderHtml()
                     })
                 }
+                
             }
+            movieArr=[]
         })
         .catch(error => {
             let errorMsg = ''
@@ -77,6 +103,34 @@ function fetchApi(){
             `      
                     movieInfo.innerHTML = errorMsg
     })
+}
+
+function renderHtml(){
+    let html = ''
+    for(movie of movieArr){
+    html += `
+        <div class="movie-container">
+            <img src=${movie.poster} alt="movie-poster" class="movie-img"/>
+            <div class="movie-info-box">
+                <div class="movie-title-box">
+                    <h3 class="movie-name">${movie.title}</h3>
+                    <img src="./star-icon.png" alt="star-icon" class="star-icon"/>
+                    <h5 class="movie-rated">${movie.rated}</h5>
+                </div>
+                <div class="movie-info-inner">
+                    <h5 class="movie-min">${movie.runtime}</h5>
+                    <h5 class="movie-type">${movie.genre}</h5> 
+                    <div class="watchlist-box">
+                        <button id="watchlist-btn" class="watchlist-btn" data-watch=${movie.id}>+</button>
+                        <h5>Watchlist</h5>
+                    </div>   
+                </div>
+                <p class="plot">${movie.plot}</p>
+            </div>
+        </div>
+        `      
+    }
+    movieInfo.innerHTML = html
 }
 
 //WHEN + BUTTON CLICKED, SETS ISDUPLICATE TO FALSE & GETS ARRAY SAVED TO LOCAL STORAGE, IF NOTHING SAVED CREATES EMPTY ARRAY, 
