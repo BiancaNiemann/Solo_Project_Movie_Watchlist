@@ -67,6 +67,7 @@ button.remove-btn,
     top: 145px;
     border-radius: 5px;
     width: 100%;
+    justify-content: center;
 }
 
 .input-bar{
@@ -244,10 +245,6 @@ p.plot{
     }
     .watchlist{
         font-size: 1.5rem
-    }
-    .search-bar{
-        display: flex;
-        justify-content: center;
     }
     .movie-container{
         margin-right: 25px;
