@@ -1,11 +1,11 @@
 let movieArr = []
 let searchName = ''
-let SelectedMovieArray
+let selectedMovieArray
 let selectedMovie
+let movieDataArray
 
 let alpha = false
 let rate = false
-let length = false
 
 const movieInfo = document.getElementById("movie-info")
 const searchBar = document.getElementById("search-bar")
@@ -63,20 +63,37 @@ function sortRate(){
     renderHtml()
 }
 
-//FUNCTION FIRSTS FETCHES THE IMDB NUMBER FOR THE MOVIE NAME SEARCHED FOR THEN USES THAT NUMBER TO FETCH ALL INFO ON THE SELECTED NAME
-//THEN SAVES MOVIE INFO REQUIRED IN AN OBJECT WITH AN ID NUMBER INCLUDED TO HELP WITH BUTTON CLICKS IN AN ARRAY, ADDS OBJECT TO MOVIE ARRAY
-//CHECKS IF MOVIE ARRAY NEEDS TO BE SORTED
-//RUNS THE RENDER HTML FUNCTION
+//FUNCTION FIRSTS FETCHES THE IMDB NUMBER FOR THE MOVIE NAME SEARCHED FOR THEN USES THAT NUMBER TO FETCH ALL INFO ON THE SELECTED MOVIE NAME & RUNS FUNCTION TO SAVE EACH MOVIE TO NEW OBJECT
+
+
 //IF NO MOVES MATCH SHOWS ERROR MESSSAGE
 function fetchApi(){
     fetch(`https://www.omdbapi.com/?s=${searchName}&&apikey=88275857`)
     .then(res => res.json())
     .then(data => {
-        const movieSearch = data.Search
-        let movieDetails = {}
-        for (movie of movieSearch){
-            if(movie.Poster !== "N/A"){
-                fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&&apikey=88275857`)
+        movieDataArray = data.Search
+
+        fetchMovieData()
+    })
+    .catch(error => {
+            let errorMsg = ''
+            errorMsg += `
+                <div class="start-page">
+                    <h4 class="error-text">Unable to find what you’re looking for. Please try another search.</h4>
+                </div>
+            `      
+            movieInfo.innerHTML = errorMsg
+    })
+}
+
+//USES IMDB ID IN FIRST FETCH TO FETCH ALL MOVIE INFO NEEDED AND SAVES EACH ONE TO A NEW OBJECT
+//CHECKS IF MOVIE ARRAY NEEDS TO BE SORTED
+//RUNS THE RENDER HTML FUNCTION
+function fetchMovieData(){
+    let movieDetails = {}
+        movieDataArray.forEach(movies => {
+            if (movies.Poster !== "N/A"){
+                fetch(`https://www.omdbapi.com/?i=${movies.imdbID}&&apikey=88275857`)
                     .then(res => res.json())
                     .then(movies => {
                         movieDetails = {
@@ -92,27 +109,16 @@ function fetchApi(){
                         sortAlpha()
                         sortRate()
                         renderHtml()
-                    })
-                }
-                
+                })
             }
-            movieArr=[]
         })
-        .catch(error => {
-            let errorMsg = ''
-            errorMsg += `
-                <div class="start-page">
-                    <h4 class="error-text">Unable to find what you’re looking for. Please try another search.</h4>
-                </div>
-            `      
-                    movieInfo.innerHTML = errorMsg
-    })
+    movieArr=[]
 }
 
 //LOOPS THROUGH MOVIE ARRAY AND RENDERS THE HTML TO SCREEN
 function renderHtml(){
     let html = ''
-    for(movie of movieArr){
+    movieArr.forEach(movie => {
     html += `
         <div class="movie-container">
             <img src=${movie.poster} alt="movie-poster" class="movie-img"/>
@@ -134,7 +140,7 @@ function renderHtml(){
             </div>
         </div>
         `      
-    }
+    })
     movieInfo.innerHTML = html
 }
 
@@ -145,29 +151,29 @@ function renderHtml(){
 
 function saveToLocal(e){
     let isDuplicate = false
-    SelectedMovieArray = JSON.parse(localStorage.getItem('movieInfo'))
-    if (SelectedMovieArray === null){         
-        SelectedMovieArray = []
+    selectedMovieArray = JSON.parse(localStorage.getItem('movieInfo'))
+    if (selectedMovieArray === null){         
+        selectedMovieArray = []
     }
                 
-    for (film of movieArr){
+    movieArr.forEach(film =>{
         if (e == film.id){
             selectedMovie = film
         } 
-    }    
+    })    
 
-    if(SelectedMovieArray.length >= 1) {
-        for(movie of SelectedMovieArray){
+    if(selectedMovieArray.length >= 1) {
+        selectedMovieArray.forEach(movie => {
                 if(movie.title === selectedMovie.title){
                     isDuplicate = true   
                     alert('You already have this movie saved to your watchlist')              
             } 
-        }
-    } 
+        })
+    }
          
     if(isDuplicate === false) {
-        SelectedMovieArray.push(selectedMovie)
+        selectedMovieArray.push(selectedMovie)
     }
            
-    localStorage.setItem('movieInfo', JSON.stringify(SelectedMovieArray))
+    localStorage.setItem('movieInfo', JSON.stringify(selectedMovieArray))
 }  

@@ -79,7 +79,6 @@ p.list-item{
     height: 33px;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    margin-left: 10px;;
 }
 
 .input-bar, 
@@ -120,7 +119,7 @@ p.list-item{
     width: 140px;
 }
 
-.drop-btn, .my-dropdown{
+.drop-btn, .my-dropdown, .input-bar{
     margin-left: 10px;
 }
 
@@ -131,6 +130,7 @@ p.list-item{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     margin-top: -10px;
+    margin-left: 10px;
 }
 
 .show{
