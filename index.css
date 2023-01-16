@@ -3,13 +3,13 @@ body {
     padding: 0;
     font-family: 'Inter', sans-serif;
     box-sizing: border-box;
-    color: white;
 }
 
 .container{
     width: 550px;
     margin: 0 auto;
     height: 800px;
+    color: white;
 }
 
 .movie-info, .container{
@@ -26,7 +26,8 @@ body {
 .start-page,
 .movie-title-box,
 .add-movies,
-.search-bar {
+.search-bar,
+.movie-info {
     display: flex;
 }
 
@@ -34,7 +35,7 @@ body {
 .header{
     background-image: url(./image36.png);
     background-repeat: none; 
-    height: 160px;
+    height: 10em;
     justify-content: space-around;
     width: 100%;
     align-items: center;
@@ -45,7 +46,7 @@ body {
 }
 
 h1{
-    margin-right: 60px
+    font-size: 2.5rem;
 }
 
 a{
@@ -79,6 +80,7 @@ p.list-item{
     height: 33px;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
+    margin-left: 60px
 }
 
 .input-bar, 
@@ -119,7 +121,7 @@ p.list-item{
     width: 140px;
 }
 
-.drop-btn, .my-dropdown, .input-bar{
+.drop-btn, .my-dropdown{
     margin-left: 10px;
 }
 
@@ -142,7 +144,7 @@ p.list-item{
 }
 
 .list-item:hover{
-    color: white;
+    color: aqua;
 }
 
 /*OPENING PAGE BODY STYLING*/
@@ -178,19 +180,19 @@ h4.lets-add{
 /*STYLING FOR MOVIES SEARCHED FOR & SAVED TO WATCHLIST*/
 
 .movie-info{
-    padding: 45px;
+    padding-top: 45px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .movie-container{
     border-bottom: 2px solid #2C2C2C;
-    margin-right: 45px;
-    margin-bottom: 10px;
     padding-top: 20px;
+    padding-bottom: 10px;
 }
   
 .movie-info-box{
-    width: 350px;
+    width: 290px;
 }  
 
 .movie-img{
@@ -200,12 +202,12 @@ h4.lets-add{
     margin-right: 20px;
 }
 
-h3{
+h3.movie-name{
     margin-bottom: 5px;
     font-weight: 600;
     font-size: 18px;
-    padding-right: 15px;
-    height: 30px;
+    padding-right: 0.9rem;
+    overflow: hidden
 }
 
 h3, 
@@ -224,12 +226,19 @@ h5{
 h5.movie-rated{
     margin-top: 5px;
     margin-bottom: 0;
+    margin-right: 5px;
 }
 
 .star-icon{
     margin-top: 4px;
     width: 15px;
     height: 15px;
+    margin-left: auto;
+}
+
+.watchlist{
+    font-size: 1rem;
+    color: aqua;
 }
 
 .watchlist-box, .remove-box{
@@ -248,18 +257,23 @@ p,
     font-weight: 300;
 }
 
+h5.watchlist-text{
+    color: aqua;
+}
+
 button.watchlist-btn, button.remove-btn{
     width: 25px;
     height: 25px;
     border-radius: 50%;
     margin-top: 5px;
-    background-color: white;
+    background-color: aqua;
+    border: none;
     color: black;
 }
 
 p.plot{
-    width: 330px;
-    font-size: 14px;
+    width: 270px;
+    font-size: 0.75rem;
     margin-top: 5px;
     margin-bottom: 0;
 }
@@ -271,31 +285,14 @@ p.plot{
 /* MEDIA QUERIES*/
 @media (min-width:560px){
     .container{
-        width: auto;
+        width: 100%;
     }
-    .movie-info{
-        display: grid;
-        grid-template-columns: auto auto;
-        padding-left: 20px
-    }
-    h1{
-        font-size: 2rem;
-    }
-    .watchlist{
-        font-size: 1.5rem
+    .input-bar{
+        margin-left: 0;
     }
     .movie-container{
-        margin-right: 25px;
-    }
-    p.plot{
-        width: 280px;
-        font-size: 12px;
-    }
-    .movie-info-box{
-        width: 280px;
-    }
-    .movie-img{
-        margin-right: 10px
+        margin-right: 1em;
+        margin-left: 1em;
     }
     .drop-btn, .my-dropdown{
         margin-left: 50px;
@@ -303,26 +300,6 @@ p.plot{
 }
 
 @media (min-width:1320px){
-    h1{
-        font-size: 4rem;
-        margin-top: 20px;
-    }
-    .watchlist{
-        font-size: 2.5rem
-    }
-    .movie-info{
-        grid-template-columns: auto auto auto;
-        padding-left: 50px;
-    }
-    .movie-container{
-        margin-right: 35px;
-    }
-    p.plot{
-        width: 300px;
-    }
-    .movie-info-box{
-        width: 300px;
-    }
     h5.movie-min, h5.movie-type, p.plot{
         font-size: 11px;
     }

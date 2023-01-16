@@ -133,7 +133,7 @@ function renderHtml(){
                     <h5 class="movie-type">${movie.genre}</h5> 
                     <div class="watchlist-box">
                         <button id="watchlist-btn" class="watchlist-btn" data-watch=${movie.id}>+</button>
-                        <h5>Watchlist</h5>
+                        <h5 class="watchlist-text">Watchlist</h5>
                     </div>   
                 </div>
                 <p class="plot">${movie.plot}</p>
