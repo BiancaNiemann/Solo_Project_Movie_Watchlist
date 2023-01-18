@@ -36,8 +36,7 @@ function renderWatchList(){
                         <h5 class="movie-min">${movie.runtime}</h5>
                         <h5 class="movie-type">${movie.genre}</h5> 
                         <div class="remove-box">
-                            <button id="remove-btn" class="remove-btn" data-remove=${movie.id}>-</button>
-                            <h5>Remove</h5>
+                            <button id="remove-btn" class="remove-btn" data-remove=${movie.id}>- Remove</button>
                         </div>
                     </div>
                     <p class="plot">${movie.plot}</p>
@@ -56,7 +55,7 @@ function renderStartPage(){
         <div class="start-page">
             <h4 class="start-text">Your watchlist is looking a little empty...</h4>
              <div class="add-movies">
-                <a href="./index.html"><button class="watchlist-btn" >+</button></a>
+                <a href="./index.html"><button class="lets-add-btn" >+</button></a>
                 <h4 class="lets-add">Lets add some movies!</h4>
             </div>
         </div>

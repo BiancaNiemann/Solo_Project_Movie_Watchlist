@@ -51,15 +51,7 @@ function sortAlpha(){
 
 //WILL SORT MOVIE ARRAY IN RATINGS ORDER IF SELECTED
 function sortRate(){
-    movieArr.sort(function (a, b) {
-        if (a.rated < b.rated) {
-            return -1
-        }
-        if (a.rated > b.rated) {
-            return 1
-        }
-        return 0
-        })
+    movieArr.sort((a,b) => b.rated - a.rated)
     renderHtml()
 }
 
@@ -131,10 +123,7 @@ function renderHtml(){
                 <div class="movie-info-inner">
                     <h5 class="movie-min">${movie.runtime}</h5>
                     <h5 class="movie-type">${movie.genre}</h5> 
-                    <div class="watchlist-box">
-                        <button id="watchlist-btn" class="watchlist-btn" data-watch=${movie.id}>+</button>
-                        <h5 class="watchlist-text">Watchlist</h5>
-                    </div>   
+                    <button id="watchlist-btn" class="watchlist-btn" data-watch=${movie.id}>+ Watchlist</button>
                 </div>
                 <p class="plot">${movie.plot}</p>
             </div>
