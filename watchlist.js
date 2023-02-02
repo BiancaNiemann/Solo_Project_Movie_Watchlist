@@ -24,7 +24,7 @@ function renderWatchList(){
     let html = ''
     for (movie of watchList){
         html += `
-            <div class="movie-container">
+            <div class="movie-card">
                 <img src=${movie.poster} alt="movie-poster" class="movie-img"/>
                 <div class="movie-info-box">
                     <div class="movie-title-box">
@@ -68,7 +68,7 @@ function removeFromLocal(e){
     for (movie of watchList){
         if(e == movie.id){
             let movieIndex = watchList.indexOf(movie)
-            let updatedSelection = watchList.splice(movieIndex, 1)
+            watchList.splice(movieIndex, 1)
             localStorage.setItem('movieInfo', JSON.stringify(watchList))
         }
     }

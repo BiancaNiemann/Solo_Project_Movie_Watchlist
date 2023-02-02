@@ -7,7 +7,7 @@ let movieDataArray
 let alpha = false
 let rate = false
 
-const movieInfo = document.getElementById("movie-info")
+const movieInfo = document.getElementById("movies-container")
 const searchBar = document.getElementById("search-bar")
 
 //EVENT LISTENERS FOR SEARCH BUTTON TO GET INPUT VALUE AND RUN THE FUNCTION TO FETCH API, AND FOR WATCHLIST BUTTON TO RUN THE FUNCTION TO SAVE TO LOCAL STORAGE
@@ -112,7 +112,7 @@ function renderHtml(){
     let html = ''
     movieArr.forEach(movie => {
     html += `
-        <div class="movie-container">
+        <div class="movie-card">
             <img src=${movie.poster} alt="movie-poster" class="movie-img"/>
             <div class="movie-info-box">
                 <div class="movie-title-box">
@@ -134,7 +134,7 @@ function renderHtml(){
 }
 
 //WHEN + BUTTON CLICKED, SETS ISDUPLICATE TO FALSE & GETS ARRAY SAVED TO LOCAL STORAGE, IF NOTHING SAVED CREATES EMPTY ARRAY, 
-//LOOPS THROUGH MOVIES DIPLAYED TILL ID MATCHES CLICK ID AND SAVES FIMLM OBJECT TO VARIABLE
+//LOOPS THROUGH MOVIES DIPLAYED TILL ID MATCHES CLICK ID AND SAVES FILM OBJECT TO VARIABLE
 //CHECKS IF THIS FILM ALREADY SAVED TO LOCAL STORAGE, IF IT IS THEN CHANGES ISDUPLICATE TO TRUE AND SHOWS ALERT
 //IF ISDUPLICATE SET TO FALSE WILL ADD THE MOVIES TO ARRAY AND UPDATE LOCAL STORAGE
 
@@ -155,7 +155,7 @@ function saveToLocal(e){
         selectedMovieArray.forEach(movie => {
                 if(movie.title === selectedMovie.title){
                     isDuplicate = true   
-                    alert('You already have this movie saved to your watchlist')              
+                    alert('You already have this movie saved to your watchlist')
             } 
         })
     }
