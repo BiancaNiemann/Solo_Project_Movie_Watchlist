@@ -78,7 +78,7 @@ function fetchApi(){
     })
 }
 
-//USES IMDB ID IN FIRST FETCH TO FETCH ALL MOVIE INFO NEEDED AND SAVES EACH ONE TO A NEW OBJECT
+//USES IMDB ID TO FIRST FETCH TO FETCH ALL MOVIE INFO NEEDED AND SAVES EACH ONE TO A NEW OBJECT
 //CHECKS IF MOVIE ARRAY NEEDS TO BE SORTED
 //RUNS THE RENDER HTML FUNCTION
 function fetchMovieData(){
@@ -139,12 +139,13 @@ function renderHtml(){
 //IF ISDUPLICATE SET TO FALSE WILL ADD THE MOVIES TO ARRAY AND UPDATE LOCAL STORAGE
 
 function saveToLocal(e){
+
     let isDuplicate = false
     selectedMovieArray = JSON.parse(localStorage.getItem('movieInfo'))
     if (selectedMovieArray === null){         
         selectedMovieArray = []
     }
-                
+         
     movieArr.forEach(film =>{
         if (e == film.id){
             selectedMovie = film
@@ -156,8 +157,9 @@ function saveToLocal(e){
                 if(movie.title === selectedMovie.title){
                     isDuplicate = true   
                     alert('You already have this movie saved to your watchlist')
-            } 
-        })
+                } 
+            }
+        )
     }
          
     if(isDuplicate === false) {
